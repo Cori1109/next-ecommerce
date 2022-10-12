@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, Dispatch } from 'react';
 
-interface Product {
+export interface Product {
   name: string;
   slug: string;
   category: string;
@@ -20,6 +20,7 @@ interface defaultState {
 
 export enum CartActionType {
   CartAddItem,
+  CartRemoveItem,
 }
 
 interface CartAddItem {
@@ -27,7 +28,12 @@ interface CartAddItem {
   payload: Product;
 }
 
-type ProductActions = CartAddItem;
+interface CartRemoveItem {
+  type: CartActionType.CartRemoveItem;
+  payload: Product;
+}
+
+type ProductActions = CartAddItem | CartRemoveItem;
 
 const initState: defaultState = {
   cart: { cartItems: [] },
@@ -54,6 +60,12 @@ const reducer = (state: defaultState, action: ProductActions): defaultState => {
           )
         : [...state.cart.cartItems, newItem];
 
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case CartActionType.CartRemoveItem: {
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item.slug !== action.payload.slug
+      );
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     default:
