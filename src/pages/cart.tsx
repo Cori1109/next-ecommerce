@@ -13,7 +13,7 @@ const CartPage = () => {
     cart: { cartItems },
   } = state;
 
-  const removeItemHandler = (item) => {
+  const removeItemHandler = (item: any) => {
     dispatch({ type: CartActionType.CartRemoveItem, payload: item });
   };
 
