@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
+    "strictPropertyInitialization": false, // fixed typeorm
+    "experimentalDecorators": true, // fixed typeorm
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": true, // fixed typeorm
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
