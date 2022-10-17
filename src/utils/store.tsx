@@ -32,6 +32,7 @@ export enum CartActionType {
   CartRemoveItem,
   CartReset,
   SaveShippingAddress,
+  SavePaymentAddress,
 }
 
 interface CartAddItem {
@@ -53,11 +54,17 @@ interface SaveShippingAddress {
   payload: IShippingAddr;
 }
 
+interface SavePaymentAddress {
+  type: CartActionType.SavePaymentAddress;
+  payload: any;
+}
+
 type ProductActions =
   | CartAddItem
   | CartRemoveItem
   | CartReset
-  | SaveShippingAddress;
+  | SaveShippingAddress
+  | SavePaymentAddress;
 
 const initState: defaultState = {
   cart: Cookies.get('cart')
@@ -111,6 +118,15 @@ const reducer = (state: defaultState, action: ProductActions): defaultState => {
         cart: {
           ...state.cart,
           shippingAddress: { ...state.cart.shippingAddress, ...action.payload },
+        },
+      };
+    }
+    case CartActionType.SavePaymentAddress: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          paymentMethod: action.payload,
         },
       };
     }
