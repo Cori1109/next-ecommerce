@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Store } from '@/utils/store';
+import { CartActionType, Store } from '@/utils/store';
 import { signOut, useSession } from 'next-auth/react';
 import { Menu } from '@headlessui/react';
 import DropdownLink from './DropdownLink';
@@ -29,7 +29,7 @@ const Layout = ({ title, children }: Props) => {
 
   const logoutClickHandler = () => {
     Cookies.remove('cart');
-    dispatch({ type: 'CART_RESET' });
+    dispatch({ type: CartActionType.CartReset });
     signOut({ callbackUrl: '/login' });
   };
 

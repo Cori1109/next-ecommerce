@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { getError } from '@/utils/error';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import * as URL from 'url';
 
 const LoginPage = () => {
   const { data: session } = useSession();

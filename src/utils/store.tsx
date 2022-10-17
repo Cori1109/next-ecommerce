@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, Dispatch } from 'react';
 import Cookies from 'js-cookie';
 
-export interface Product {
+export interface IProduct {
   name: string;
   slug: string;
   category: string;
@@ -15,37 +15,54 @@ export interface Product {
   quantity: number;
 }
 
+export interface IShippingAddr {
+  fullName: string;
+  address: string;
+  city: string;
+  postalCode: any;
+  country: any;
+}
+
 interface defaultState {
-  cart: { cartItems: Product[]; shippingAddress: any; paymentMethod: any };
+  cart: { cartItems: IProduct[]; shippingAddress: any; paymentMethod: any };
 }
 
 export enum CartActionType {
   CartAddItem,
   CartRemoveItem,
   CartReset,
+  SaveShippingAddress,
 }
 
 interface CartAddItem {
   type: CartActionType.CartAddItem;
-  payload: Product;
+  payload: IProduct;
 }
 
 interface CartRemoveItem {
   type: CartActionType.CartRemoveItem;
-  payload: Product;
+  payload: IProduct;
 }
 
 interface CartReset {
   type: CartActionType.CartReset;
-  payload: Product;
 }
 
-type ProductActions = CartAddItem | CartRemoveItem | CartReset;
+interface SaveShippingAddress {
+  type: CartActionType.SaveShippingAddress;
+  payload: IShippingAddr;
+}
+
+type ProductActions =
+  | CartAddItem
+  | CartRemoveItem
+  | CartReset
+  | SaveShippingAddress;
 
 const initState: defaultState = {
   cart: Cookies.get('cart')
     ? JSON.parse(Cookies.get('cart')!)
-    : { cartItems: [] },
+    : { cartItems: [], shippingAddress: {} },
 };
 
 export const Store = createContext<{
@@ -85,6 +102,15 @@ const reducer = (state: defaultState, action: ProductActions): defaultState => {
           cartItems: [],
           shippingAddress: { location: {} },
           paymentMethod: '',
+        },
+      };
+    }
+    case CartActionType.SaveShippingAddress: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: { ...state.cart.shippingAddress, ...action.payload },
         },
       };
     }

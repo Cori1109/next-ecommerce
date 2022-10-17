@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import { CartActionType, Product, Store } from '@/utils/store';
+import { CartActionType, IProduct, Store } from '@/utils/store';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Image from 'next/image';
