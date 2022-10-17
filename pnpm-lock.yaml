@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@headlessui/react': ^1.7.3
   '@heroicons/react': ^2.0.12
   '@types/bcryptjs': ^2.4.2
   '@types/js-cookie': ^3.0.2
@@ -26,6 +27,7 @@ specifiers:
   typescript: 4.8.4
 
 dependencies:
+  '@headlessui/react': 1.7.3_biqbaboplfbrettd7655fr4n2y
   '@heroicons/react': 2.0.12_react@18.2.0
   bcryptjs: 2.4.3
   js-cookie: 3.0.1
@@ -84,6 +86,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@headlessui/react/1.7.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-LGp06SrGv7BMaIQlTs8s2G06moqkI0cb0b8stgq7KZ3xcHdH3qMP+cRyV7qe5x4XEW/IGY48BW4fLesD6NQLng==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@heroicons/react/2.0.12_react@18.2.0:
     resolution: {integrity: sha512-FZxKh3i9aKIDxyALTgIpSF2t6V6/eZfF5mRu41QlwkX3Oxzecdm1u6dpft6PQGxIBwO7TKYWaMAYYL8mp/EaOg==}

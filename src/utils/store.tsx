@@ -16,12 +16,13 @@ export interface Product {
 }
 
 interface defaultState {
-  cart: { cartItems: Product[] };
+  cart: { cartItems: Product[]; shippingAddress: any; paymentMethod: any };
 }
 
 export enum CartActionType {
   CartAddItem,
   CartRemoveItem,
+  CartReset,
 }
 
 interface CartAddItem {
@@ -34,7 +35,12 @@ interface CartRemoveItem {
   payload: Product;
 }
 
-type ProductActions = CartAddItem | CartRemoveItem;
+interface CartReset {
+  type: CartActionType.CartReset;
+  payload: Product;
+}
+
+type ProductActions = CartAddItem | CartRemoveItem | CartReset;
 
 const initState: defaultState = {
   cart: Cookies.get('cart')
@@ -71,6 +77,16 @@ const reducer = (state: defaultState, action: ProductActions): defaultState => {
       );
       Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case CartActionType.CartReset: {
+      return {
+        ...state,
+        cart: {
+          cartItems: [],
+          shippingAddress: { location: {} },
+          paymentMethod: '',
+        },
+      };
     }
     default:
       return state;
