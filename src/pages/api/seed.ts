@@ -13,12 +13,11 @@ const handler = async (
   res: NextApiResponse<ResponseData>
 ) => {
   await db.connection();
-  const user = new User();
-  user.email = data.users[1].email;
-  user.name = data.users[1].name;
-  user.password = data.users[1].password;
-  user.isAdmin = data.users[1].isAdmin;
-  await db.AppDataSource.manager.save(user);
+  await db.AppDataSource.manager.clear(User);
+  let users: User[] = [];
+  users = data.users;
+  await db.AppDataSource.getMongoRepository(User).save(users);
+
   await db.disconnection();
   res.send({ message: 'seeded successful' });
 };
