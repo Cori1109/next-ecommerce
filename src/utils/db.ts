@@ -1,6 +1,7 @@
 import { DataSource, getMongoManager } from 'typeorm';
 import 'reflect-metadata';
 import { User } from 'src/models/User.entity';
+import { Product } from 'src/models/Product.entity';
 
 const AppDataSource = new DataSource({
   type: 'mongodb',
@@ -10,7 +11,7 @@ const AppDataSource = new DataSource({
   useUnifiedTopology: true,
   synchronize: true,
   logging: true,
-  entities: [User],
+  entities: [User, Product],
 });
 
 const connection = async () => {
