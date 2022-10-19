@@ -34,6 +34,10 @@ const disconnection = async () => {
     });
 };
 
-const db = { connection, disconnection, AppDataSource };
+const db = {
+  connection,
+  disconnection,
+  AppDataSource,
+};
 
 export default db;
