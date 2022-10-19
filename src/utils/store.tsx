@@ -31,6 +31,7 @@ export enum CartActionType {
   CartAddItem,
   CartRemoveItem,
   CartReset,
+  CartClearItems,
   SaveShippingAddress,
   SavePaymentAddress,
 }
@@ -49,6 +50,11 @@ interface CartReset {
   type: CartActionType.CartReset;
 }
 
+interface CartClearItems {
+  type: CartActionType.CartClearItems;
+  payload: any;
+}
+
 interface SaveShippingAddress {
   type: CartActionType.SaveShippingAddress;
   payload: IShippingAddr;
@@ -63,6 +69,7 @@ type ProductActions =
   | CartAddItem
   | CartRemoveItem
   | CartReset
+  | CartClearItems
   | SaveShippingAddress
   | SavePaymentAddress;
 
@@ -109,6 +116,15 @@ const reducer = (state: defaultState, action: ProductActions): defaultState => {
           cartItems: [],
           shippingAddress: { location: {} },
           paymentMethod: '',
+        },
+      };
+    }
+    case CartActionType.CartClearItems: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          cartItems: [],
         },
       };
     }
