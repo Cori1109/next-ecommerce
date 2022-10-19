@@ -52,7 +52,6 @@ interface CartReset {
 
 interface CartClearItems {
   type: CartActionType.CartClearItems;
-  payload: any;
 }
 
 interface SaveShippingAddress {
