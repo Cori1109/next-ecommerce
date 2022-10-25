@@ -3,6 +3,7 @@ import db from '@/utils/db';
 import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcryptjs from 'bcryptjs';
+import { ObjectID } from 'mongodb';
 
 export default NextAuth({
   session: {
@@ -26,7 +27,7 @@ export default NextAuth({
             bcryptjs.compareSync(credentials.password, user.password)
           ) {
             return {
-              _id: user._id,
+              _id: new ObjectID(user._id),
               name: user.name,
               email: user.email,
               image: 'f',
