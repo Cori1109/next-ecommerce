@@ -38,20 +38,17 @@ class ShippingAddress {
 
   @Column('text', { nullable: false })
   country: string;
+}
 
-  // constructor(
-  //   fullName: string,
-  //   address: string,
-  //   city: string,
-  //   postalCode: string,
-  //   country: string
-  // ) {
-  //   this.fullName = fullName;
-  //   this.address = address;
-  //   this.city = city;
-  //   this.postalCode = postalCode;
-  //   this.country = country;
-  // }
+class PaymentResult {
+  @Column('varchar', { nullable: false })
+  id: string;
+
+  @Column('varchar', { nullable: false })
+  status: string;
+
+  @Column('text', { nullable: false })
+  email_address: string;
 }
 
 @Entity('Order')
@@ -70,6 +67,9 @@ export class Order {
 
   @Column('varchar', { nullable: false })
   paymentMethod: string;
+
+  @Column((type) => PaymentResult)
+  paymentResult: PaymentResult;
 
   @Column('numeric', { nullable: false })
   itemsPrice: number;

@@ -11,6 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { user } = session;
+  console.log(user);
   await db.connection();
   // const newOrder = new Order({
   //   ...req.body,
