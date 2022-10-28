@@ -97,7 +97,7 @@ const AdminOrderPage = () => {
                       </td>
                       <td className="p-5">
                         {order.isDelivered
-                          ? `${order.deliveredAt.substring(0, 10)}`
+                          ? `${order.deliveredAt.toString().substring(0, 10)}`
                           : 'not delivered'}
                       </td>
                       <td className="p-5">
