@@ -39,8 +39,7 @@ async function handler(req, res) {
   if (password) {
     toUpdateUser.password = bcryptjs.hashSync(password);
   }
-  console.log(toUpdateUser);
-  // await toUpdateUser.save();
+  // console.log(toUpdateUser);
   await db.AppDataSource.getMongoRepository(User).save(toUpdateUser);
   await db.disconnection();
   res.send({

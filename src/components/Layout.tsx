@@ -81,7 +81,7 @@ const Layout = ({ title, children }: Props) => {
                         Order History
                       </DropdownLink>
                     </Menu.Item>
-                    {/* {session.user.isAdmin && (
+                    {session.user.isAdmin && (
                       <Menu.Item>
                         <DropdownLink
                           className="dropdown-link"
@@ -90,7 +90,7 @@ const Layout = ({ title, children }: Props) => {
                           Admin Dashboard
                         </DropdownLink>
                       </Menu.Item>
-                    )} */}
+                    )}
                     <Menu.Item>
                       <a
                         className="dropdown-link"
