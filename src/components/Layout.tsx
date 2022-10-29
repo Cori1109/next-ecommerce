@@ -81,16 +81,19 @@ const Layout = ({ title, children }: Props) => {
                         Order History
                       </DropdownLink>
                     </Menu.Item>
-                    {session.user.isAdmin && (
-                      <Menu.Item>
-                        <DropdownLink
-                          className="dropdown-link"
-                          href="/admin/dashboard"
-                        >
-                          Admin Dashboard
-                        </DropdownLink>
-                      </Menu.Item>
-                    )}
+                    {
+                      // @ts-ignore
+                      session.user.isAdmin && (
+                        <Menu.Item>
+                          <DropdownLink
+                            className="dropdown-link"
+                            href="/admin/dashboard"
+                          >
+                            Admin Dashboard
+                          </DropdownLink>
+                        </Menu.Item>
+                      )
+                    }
                     <Menu.Item>
                       <a
                         className="dropdown-link"
