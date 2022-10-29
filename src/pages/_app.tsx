@@ -5,6 +5,7 @@ import { StoreProvider } from '@/utils/store';
 import { useRouter } from 'next/router';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
+// @ts-ignore
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
@@ -13,13 +14,17 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           deferLoading={true}
           options={{ 'client-id': process.env.PAYPAL_CLIENT_ID || 'sb' }}
         >
-          {Component.auth ? (
-            <Auth adminOnly={Component.auth.adminOnly}>
+          {
+            // @ts-ignore
+            Component.auth ? (
+              // @ts-ignore
+              <Auth adminOnly={Component.auth.adminOnly}>
+                <Component {...pageProps} />
+              </Auth>
+            ) : (
               <Component {...pageProps} />
-            </Auth>
-          ) : (
-            <Component {...pageProps} />
-          )}
+            )
+          }
         </PayPalScriptProvider>
       </StoreProvider>
     </SessionProvider>
@@ -37,6 +42,7 @@ function Auth({ children, adminOnly }) {
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
+  // @ts-ignore
   if (adminOnly && !session.user.isAdmin) {
     router.push('/unauthorized?message=admin login required');
   }

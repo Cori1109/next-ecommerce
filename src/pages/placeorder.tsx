@@ -106,6 +106,7 @@ const PlaceorderPage = () => {
                 </thead>
                 <tbody>
                   {cartItems.map((item) => (
+                    // @ts-ignore
                     <tr key={item._id} className="border-b">
                       <td>
                         <Link href={`/product/${item.slug}`}>

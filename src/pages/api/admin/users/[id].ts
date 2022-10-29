@@ -5,6 +5,7 @@ import { ObjectID } from 'mongodb';
 
 const handler = async (req, res) => {
   const session = await getSession({ req });
+  // @ts-ignore
   if (!session || !session.user.isAdmin) {
     return res.status(401).send('admin signin required');
   }

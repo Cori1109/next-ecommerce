@@ -104,6 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   await db.connection();
   const product = await db.AppDataSource.manager.findOneBy(Product, {
+    // @ts-ignore
     slug: slug,
   });
   await db.disconnection();

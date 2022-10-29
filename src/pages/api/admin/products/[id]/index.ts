@@ -6,6 +6,7 @@ import { Product } from '@/models/Product.entity';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
+  // @ts-ignore
   if (!session || (session && !session.user.isAdmin)) {
     return res.status(401).send('signin required');
   }

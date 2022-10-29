@@ -103,6 +103,7 @@ const OrderPage = () => {
             currency: 'USD',
           },
         });
+        // @ts-ignore
         paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
       };
       loadPaypalScript();
@@ -290,17 +291,20 @@ const OrderPage = () => {
                     {loadingPay && <div>Loading...</div>}
                   </li>
                 )}
-                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
-                  <li>
-                    {loadingDeliver && <div>Loading...</div>}
-                    <button
-                      className="primary-button w-full"
-                      onClick={deliverOrderHandler}
-                    >
-                      Deliver Order
-                    </button>
-                  </li>
-                )}
+                {
+                  // @ts-ignore
+                  session.user.isAdmin && order.isPaid && !order.isDelivered && (
+                    <li>
+                      {loadingDeliver && <div>Loading...</div>}
+                      <button
+                        className="primary-button w-full"
+                        onClick={deliverOrderHandler}
+                      >
+                        Deliver Order
+                      </button>
+                    </li>
+                  )
+                }
               </ul>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { getSession } from 'next-auth/react';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
+  // @ts-ignore
   if (!session || !session.user.isAdmin) {
     return res.status(401).send('admin signin required');
   }

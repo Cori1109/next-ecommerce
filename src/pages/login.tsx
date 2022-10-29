@@ -15,6 +15,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (session?.user) {
+      // @ts-ignore
       router.push(redirect || '/');
     }
   }, [router, session, redirect]);
