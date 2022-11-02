@@ -55,8 +55,31 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ])
     .toArray();
 
+  const paidsData = await db.AppDataSource.getMongoRepository(Order)
+    .aggregate([
+      {
+        $match: {
+          isPaid: { $eq: true },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m', date: '$created_at' } },
+          totalSales: { $sum: '$totalPrice' },
+        },
+      },
+    ])
+    .toArray();
+
   await db.disconnection();
-  res.send({ ordersCount, productsCount, usersCount, ordersPrice, salesData });
+  res.send({
+    ordersCount,
+    productsCount,
+    usersCount,
+    ordersPrice,
+    salesData,
+    paidsData,
+  });
 };
 
 export default handler;

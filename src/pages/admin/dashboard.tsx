@@ -14,6 +14,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { Tab } from '@headlessui/react';
 
 ChartJS.register(
   CategoryScale,
@@ -32,10 +33,14 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Bar Chart',
+      text: 'Bar Chart',
     },
   },
 };
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
 
 function reducer(state, action) {
   switch (action.type) {
@@ -53,7 +58,7 @@ function reducer(state, action) {
 const AdminDashoardPage = () => {
   const [{ loading, error, summary }, dispatch] = useReducer(reducer, {
     loading: true,
-    summary: { salesData: [] },
+    summary: { salesData: [], paidsData: [] },
     error: '',
   });
 
@@ -71,7 +76,7 @@ const AdminDashoardPage = () => {
     fetchData();
   }, []);
 
-  const data = {
+  const saleData = {
     labels: summary.salesData.map((x) => x._id), // 2022/01 2022/03
     datasets: [
       {
@@ -82,7 +87,18 @@ const AdminDashoardPage = () => {
     ],
   };
 
-  console.log(data);
+  const paidData = {
+    labels: summary.paidsData.map((x) => x._id), // 2022/01 2022/03
+    datasets: [
+      {
+        label: 'Sales',
+        backgroundColor: 'rgba(162, 222, 208, 1)',
+        data: summary.paidsData.map((x) => x.totalSales),
+      },
+    ],
+  };
+
+  console.log(summary.salesData);
 
   return (
     <Layout title="Admin Dashboard">
@@ -135,8 +151,45 @@ const AdminDashoardPage = () => {
                   <Link href="/admin/users">View users</Link>
                 </div>
               </div>
-              <h2 className="text-xl">Sales Report</h2>
-              <Bar options={options} data={data} />
+
+              <Tab.Group>
+                <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+                  <Tab
+                    className={({ selected }) =>
+                      classNames(
+                        'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
+                        'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                        selected
+                          ? 'bg-white shadow'
+                          : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                      )
+                    }
+                  >
+                    <h2 className="text-xl">Sales Report</h2>
+                  </Tab>
+                  <Tab
+                    className={({ selected }) =>
+                      classNames(
+                        'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
+                        'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                        selected
+                          ? 'bg-white shadow'
+                          : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
+                      )
+                    }
+                  >
+                    <h2 className="text-xl">Paid Report</h2>
+                  </Tab>
+                </Tab.List>
+                <Tab.Panels>
+                  <Tab.Panel>
+                    <Bar options={options} data={saleData} />
+                  </Tab.Panel>
+                  <Tab.Panel>
+                    <Bar options={options} data={paidData} />
+                  </Tab.Panel>
+                </Tab.Panels>
+              </Tab.Group>
             </div>
           )}
         </div>
