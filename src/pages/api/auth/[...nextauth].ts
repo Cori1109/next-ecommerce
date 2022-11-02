@@ -42,13 +42,14 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }: any) {
-      if (user?.id) token._id = user._id;
+      if (user?._id) token._id = user._id;
       if (user?.isAdmin) token.isAdmin = user.isAdmin;
       return token;
     },
     async session({ session, token }: any) {
       if (token?._id) session.user._id = token._id;
       if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
+      // console.log(session);
       return session;
     },
   },

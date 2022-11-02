@@ -9,6 +9,23 @@ import {
 import { User } from './User.entity';
 import 'reflect-metadata';
 
+class UserDetail {
+  @ObjectIdColumn()
+  _id?: ObjectID;
+
+  @Column('varchar', { nullable: false })
+  name: string;
+
+  @Column('varchar', { nullable: false })
+  email: string;
+
+  @Column('varchar', { nullable: false })
+  password: string;
+
+  @Column('boolean', { nullable: false, default: false })
+  isAdmin: boolean;
+}
+
 class OrderItem {
   @Column('varchar', { nullable: false })
   name: string;
@@ -63,7 +80,7 @@ export class Order {
   @ObjectIdColumn()
   _id?: ObjectID;
 
-  @Column((type) => User)
+  @Column((type) => UserDetail)
   user: User;
 
   @Column((type) => OrderItem)
