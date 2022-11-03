@@ -21,6 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // console.log(user);
   const _user = await db.AppDataSource.manager.findOne(User, {
     where: {
+      // @ts-ignore
       _id: new ObjectID(user._id as string),
     },
   });

@@ -16,6 +16,7 @@ const handler = async (req, res) => {
   });
   if (order) {
     order.isDelivered = true;
+    // @ts-ignore
     order.deliveredAt = Date.now();
     const deliveredOrder = await db.AppDataSource.getMongoRepository(
       Order

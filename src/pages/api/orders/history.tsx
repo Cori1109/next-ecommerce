@@ -12,6 +12,7 @@ const handler = async (req, res) => {
 
   const orders = await db.AppDataSource.manager.find(Order, {
     where: {
+      // @ts-ignore
       'user.email': user.email,
     },
   });

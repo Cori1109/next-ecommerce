@@ -183,9 +183,11 @@ const AdminDashoardPage = () => {
                 </Tab.List>
                 <Tab.Panels>
                   <Tab.Panel>
+                    {/* @ts-ignore */}
                     <Bar options={options} data={saleData} />
                   </Tab.Panel>
                   <Tab.Panel>
+                    {/* @ts-ignore */}
                     <Bar options={options} data={paidData} />
                   </Tab.Panel>
                 </Tab.Panels>
