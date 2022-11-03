@@ -1,21 +1,18 @@
-import { Product } from 'src/models/Product.entity';
-import data from '@/utils/data';
-import db from '@/utils/db';
-import 'reflect-metadata';
 import Layout from '@/components/Layout';
 import ProductItem from '@/components/ProductItem';
-import type { GetServerSideProps, NextPage } from 'next';
-import { useContext } from 'react';
-import { CartActionType, IProduct, Store } from '@/utils/store';
+import { Product } from 'src/models/Product.entity';
+import db from '@/utils/db';
+import { CartActionType, Store } from '@/utils/store';
 import axios from 'axios';
+import { GetServerSideProps, NextPage } from 'next';
+import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
-import { Carousel } from 'flowbite-react';
 
 interface Props {
   products: any;
 }
 
-const Home: NextPage = ({ products }: Props) => {
+const ProductsPage: NextPage = ({ products }: Props) => {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
 
@@ -38,25 +35,6 @@ const Home: NextPage = ({ products }: Props) => {
 
   return (
     <Layout>
-      <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 py-4">
-        <Carousel>
-          <img
-            src="/images/banner/cloth_banner_001.jpg"
-            alt="Image by StockSnap from Pixabay "
-            className="w-full"
-          />
-          <img
-            src="/images/banner/cloth_banner_002.png"
-            alt=""
-            className="w-full"
-          />
-          <img
-            src="/images/banner/cloth_banner_003.jpg"
-            alt=""
-            className="w-full"
-          />
-        </Carousel>
-      </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
           <ProductItem
@@ -84,4 +62,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-export default Home;
+export default ProductsPage;

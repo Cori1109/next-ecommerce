@@ -46,9 +46,20 @@ const Layout = ({ title, children }: Props) => {
       <div className="flex min-h-screen flex-col justify-between">
         <header>
           <nav className="flex h-12 items-center px-4 justify-between shadow-md">
-            <Link href="/">
-              <a className="text-lg font-bold">Ecommerce</a>
-            </Link>
+            <div>
+              <Link href="/">
+                <a className="text-lg font-bold px-2">Ecommerce</a>
+              </Link>
+              <Link href="/">
+                <a className="p-2">Home</a>
+              </Link>
+              <Link href="/news">
+                <a className="p-2">News</a>
+              </Link>
+              <Link href="/product">
+                <a className="p-2">Products</a>
+              </Link>
+            </div>
             <div>
               <Link href="/cart">
                 <a className="p-2">
