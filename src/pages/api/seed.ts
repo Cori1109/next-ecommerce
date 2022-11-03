@@ -14,8 +14,8 @@ const handler = async (
   res: NextApiResponse<ResponseData>
 ) => {
   await db.connection();
-  await db.AppDataSource.manager.clear(User);
-  await db.AppDataSource.manager.clear(Product);
+  // await db.AppDataSource.manager.clear(User);
+  // await db.AppDataSource.manager.clear(Product);
   let users: User[] = [];
   let products: Product[] = [];
   users = data.users;
