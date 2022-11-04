@@ -6,8 +6,9 @@ import { Order } from 'src/models/Order.entity';
 
 const AppDataSource = new DataSource({
   type: 'mongodb',
-  host: 'localhost',
-  port: 27017,
+  // host: 'localhost',
+  // port: 27017,
+  url: process.env.MONGODB_URI,
   database: 'test',
   useUnifiedTopology: true,
   synchronize: true,
