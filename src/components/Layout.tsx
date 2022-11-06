@@ -43,7 +43,7 @@ const Layout = ({ title, children }: Props) => {
 
       <ToastContainer position="bottom-center" limit={1} />
 
-      <div className="flex min-h-screen flex-col justify-between">
+      <div className="flex min-h-screen flex-col justify-between z-40">
         <header>
           <nav className="flex h-12 items-center px-4 justify-between shadow-md">
             <div>
@@ -74,7 +74,7 @@ const Layout = ({ title, children }: Props) => {
               {status === 'loading' ? (
                 'Loading'
               ) : session?.user ? (
-                <Menu as="div" className="relative inline-block">
+                <Menu as="div" className="relative inline-block z-50">
                   <Menu.Button className="text-blue-600">
                     {session.user.name}
                   </Menu.Button>

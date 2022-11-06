@@ -281,11 +281,22 @@ const OrderPage = () => {
                       <div>Loading...</div>
                     ) : (
                       <div className="w-full">
-                        <PayPalButtons
-                          createOrder={createOrder}
-                          onApprove={onApprove}
-                          onError={onError}
-                        ></PayPalButtons>
+                        {(() => {
+                          switch (paymentMethod) {
+                            case 'PayPal':
+                              return (
+                                <PayPalButtons
+                                  createOrder={createOrder}
+                                  onApprove={onApprove}
+                                  onError={onError}
+                                ></PayPalButtons>
+                              );
+                            case 'Stripe':
+                              return <p>Payment by Stripe</p>;
+                            default:
+                              return <p>Payment by Default</p>;
+                          }
+                        })()}
                       </div>
                     )}
                     {loadingPay && <div>Loading...</div>}
