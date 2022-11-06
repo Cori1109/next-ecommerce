@@ -64,7 +64,14 @@ const NewPage: NextPage<Props> = ({ post, blocks }) => {
         // For an image
         return (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={block['image'].file.url} width={650} height={400} alt="" />
+          <Image
+            src={`${block['image'].file.url}`}
+            className="object-cover h-48 w-96"
+            width="650"
+            height="400"
+            alt="image"
+            loading="lazy"
+          />
         );
 
       default:
@@ -75,8 +82,8 @@ const NewPage: NextPage<Props> = ({ post, blocks }) => {
 
   return (
     <Layout title="New">
-      <div className="grid grid-cols-4 gap-4">
-        <div className="card col-span-2 col-start-2 p-3">
+      <div className="grid md:grid-cols-4 gap-4">
+        <div className="card md:col-span-2 md:col-start-2 p-3">
           <Breadcrumb aria-label="Default breadcrumb example">
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
             <Breadcrumb.Item href="/news">News</Breadcrumb.Item>
