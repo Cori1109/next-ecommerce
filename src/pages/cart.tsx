@@ -75,6 +75,7 @@ const CartPage = () => {
                         onChange={(e) =>
                           updateCartHandler(item, e.target.value)
                         }
+                        className="w-1/2"
                       >
                         {Array.from(Array(item.countInStock).keys()).map(
                           (x) => (
